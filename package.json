@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "keys.js",
-  "dependencies": {},
+  "dependencies": {
+    "node-spotify-api": "^1.1.1"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

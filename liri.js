@@ -41,11 +41,11 @@ function spotifyThisSong(song){
             var songData = data.tracks.items[i];
                       //artist
             console.log("Artist: " + songData.artists[0].name);
-                      //song name
+                      //song
             console.log("Song: " + songData.name);
-                      //spotify preview link
+                      //preview link
             console.log("Preview URL: " + songData.preview_url);
-                      //album name
+                      //album
             console.log("Album: " + songData.album.name);
             console.log("-----------------------");
             } 
