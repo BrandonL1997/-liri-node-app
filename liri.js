@@ -1,7 +1,8 @@
-const dotenv = require("dotenv").config();
 var Spotify = require('node-spotify-api');
+var argument = process.argv[3];
 const keys = require('./keys.js');
 var request = require('request');
+var bandsintown = require('bandsintown')("codingbootcamp");
 var fs = require('fs');
 
 
@@ -20,6 +21,14 @@ switch (command) {
             spotifyThisSong("My Heart Will Go On");
          }
     break;
+
+    case ('concert-this'):
+        if(secondCommand){
+            concertThis(secondCommand);
+        } else{
+            concertThis("ACDC");
+        }
+    break;
     case ('movie-this'):
         if(secondCommand){
             omdb(secondCommand);
@@ -32,6 +41,27 @@ switch (command) {
     break;
     default:
         console.log('Try again');
+};
+function concertThis(){
+  bandsintown.getArtistEventList(argument).then(function (events) {
+
+  console.log(`
+  ${'Band: ' + argument}
+  ${'Venue Name: ' + events[0].venue.name}
+  ${'Location: ' + events[1].formatted_location}
+  ${'Date: ' + moment(events[0].datetime).format('L')}`);
+  fs.appendFile('log.txt', `
+${argument}
+Venue Name: ${events[0].venue.name}
+Location: ${events[1].formatted_location}
+Date: ${moment(events[0].datetime).format('L')}
+`,
+
+      function (err) {
+          if (err) throw err;
+          console.log('Saved to log.txt!');
+      });
+});
 };
 
 function spotifyThisSong(song){
@@ -56,7 +86,7 @@ function spotifyThisSong(song){
     }
 
     function omdb(movie){
-        var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&apikey=' + omdbKey + '&plot=short&tomatoes=true';
+        var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&apikey=trilogy' + omdbKey + '&plot=short&tomatoes=true';
       
         request(omdbURL, function (error, response, body){
           if(!error && response.statusCode == 200){
