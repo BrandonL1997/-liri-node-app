@@ -1,7 +1,9 @@
 # -liri-node-app
 in this assignment you are using node to input information and use an API to get back data that you asked for.
 Example would be asking node to Spotify-that-song and it was use the spotify API to get your results for you.
-the same can be done for movies. 
+the same can be done for movies. '
+
+Concert-this wasn't working because the server had reached capacity
 
 
 <a href="http://www.freeimagehosting.net/commercial-photography/"><img src="https://i.imgur.com/fXA1b5l.png" alt="Commercial Photography"></a>
