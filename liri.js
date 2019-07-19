@@ -51,17 +51,20 @@ function concertThis(){
   ${'Location: ' + events[1].formatted_location}
   ${'Date: ' + moment(events[0].datetime).format('L')}`);
   fs.appendFile('log.txt', `
-${argument}
-Venue Name: ${events[0].venue.name}
-Location: ${events[1].formatted_location}
-Date: ${moment(events[0].datetime).format('L')}
-`,
+  ${argument}
+  Venue Name: ${events[0].venue.name}
+  Location: ${events[1].formatted_location}
+  Date: ${moment(events[0].datetime).format('L')}
+  `,
 
-      function (err) {
-          if (err) throw err;
-          console.log('Saved to log.txt!');
-      });
-});
+        function (err) {
+            if (err) throw err;
+            console.log('Saved to log.txt!');
+        });
+  })
+  .catch(function (err) {
+    console.log(err.statusMessage);
+  });
 };
 
 function spotifyThisSong(song){
@@ -86,7 +89,7 @@ function spotifyThisSong(song){
     }
 
     function omdb(movie){
-        var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&apikey=trilogy' + omdbKey + '&plot=short&tomatoes=true';
+        var omdbURL = 'http://www.omdbapi.com/?t=' + movie + '&apikey=trilogy&plot=short&tomatoes=true';
       
         request(omdbURL, function (error, response, body){
           if(!error && response.statusCode == 200){
@@ -103,7 +106,7 @@ function spotifyThisSong(song){
             console.log("Rotten Tomatoes URL: " + body.tomatoURL);
             
           } else{
-            console.log('Error occurred.')
+            console.log('Error occurred.', response)
           }
           if(movie === "Mr. Nobody"){
             console.log("-----------------------");
